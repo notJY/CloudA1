@@ -65,7 +65,7 @@ public class PFUserMgt : MonoBehaviour
         return playfabID;
     }
 
-    string GetPlayerDisplayName()
+    void GetPlayerDisplayName()
     {
 
         var profileReq = new GetPlayerProfileRequest
@@ -73,8 +73,6 @@ public class PFUserMgt : MonoBehaviour
             PlayFabId = GetPlayerID()
         };
         PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
-        
-        return displayName;
     }
 
     void updateDisplayName()
@@ -94,7 +92,7 @@ public class PFUserMgt : MonoBehaviour
     void OnLoginSucc(LoginResult r)
     {
         //If no display name, set display name to "Guest"
-        if ((GetPlayerDisplayName() == null) || (GetPlayerDisplayName() == ""))
+        if ((displayName == null) || (displayName == ""))
         {
             updateDisplayName();
         }
