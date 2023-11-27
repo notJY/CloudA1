@@ -93,7 +93,8 @@ public class PFUserMgt : MonoBehaviour
 
     void OnLoginSucc(LoginResult r)
     {
-        if (GetPlayerDisplayName() == null)
+        //If no display name, set display name to "Guest"
+        if ((GetPlayerDisplayName() == null) || (GetPlayerDisplayName() == ""))
         {
             updateDisplayName();
         }
@@ -122,7 +123,7 @@ public class PFUserMgt : MonoBehaviour
         var guestReq = new LoginWithCustomIDRequest
         {
             CreateAccount = true,
-            CustomId = PlayFabSettings.DeviceUniqueIdentifier
+            CustomId = PlayFabSettings.DeviceUniqueIdentifier,
         };
         PlayFabClientAPI.LoginWithCustomID(guestReq, OnLoginSucc, OnError);
     }

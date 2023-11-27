@@ -273,6 +273,9 @@ MonoBehaviour:
   shotSpawn: {fileID: 4246698267964798}
   shotSpawn2: {fileID: 4869784285621466}
   fireRate: 0.25
+  shieldPrefab: {fileID: 0}
+  shieldCooldown: 13
+  usedItemName: 
 --- !u!1 &1464942715097832
 GameObject:
   m_ObjectHideFlags: 0
