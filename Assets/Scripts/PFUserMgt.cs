@@ -58,21 +58,11 @@ public class PFUserMgt : MonoBehaviour
         }
     }
 
-    string GetPlayerID()
+    void GetPlayerID()
     {
+        playfabID = null;
         var accReq = new GetAccountInfoRequest();
         PlayFabClientAPI.GetAccountInfo(accReq, r => { playfabID = r.AccountInfo.PlayFabId; }, OnError);
-        return playfabID;
-    }
-
-    void GetPlayerDisplayName()
-    {
-        displayName = null;
-        var profileReq = new GetPlayerProfileRequest
-        {
-            PlayFabId = GetPlayerID()
-        };
-        PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
     }
 
     void updateDisplayName()
@@ -96,7 +86,15 @@ public class PFUserMgt : MonoBehaviour
 
     IEnumerator LoadScene(LoginResult r)
     {
-        GetPlayerDisplayName();
+        //Get player display name
+        GetPlayerID();
+        yield return new WaitUntil(() => playfabID != null);
+        displayName = null;
+        var profileReq = new GetPlayerProfileRequest
+        {
+            PlayFabId = playfabID
+        };
+        PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
         yield return new WaitUntil(()=> displayName != null);
         //If no display name, set display name to "Guest"
         if ((displayName == null) || (displayName == ""))
