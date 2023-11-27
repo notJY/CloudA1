@@ -66,7 +66,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            highscoreTxt.text = "Highscore: \nError";
+            Debug.Log(r.Statistics);
+            highscoreTxt.text = "Highscore: 0";
             highscore = 0;
         }
     }

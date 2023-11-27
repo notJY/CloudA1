@@ -58,11 +58,23 @@ public class PFUserMgt : MonoBehaviour
         }
     }
 
-    void GetPlayerID()
+    string GetPlayerID()
     {
-        playfabID = null;
         var accReq = new GetAccountInfoRequest();
         PlayFabClientAPI.GetAccountInfo(accReq, r => { playfabID = r.AccountInfo.PlayFabId; }, OnError);
+        return playfabID;
+    }
+
+    string GetPlayerDisplayName()
+    {
+
+        var profileReq = new GetPlayerProfileRequest
+        {
+            PlayFabId = GetPlayerID()
+        };
+        PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
+
+        return displayName;
     }
 
     void updateDisplayName()
@@ -81,26 +93,11 @@ public class PFUserMgt : MonoBehaviour
 
     void OnLoginSucc(LoginResult r)
     {
-        StartCoroutine(LoadScene(r));
-    }
-
-    IEnumerator LoadScene(LoginResult r)
-    {
-        //Get player display name
-        GetPlayerID();
-        yield return new WaitUntil(() => playfabID != null);
-        displayName = null;
-        var profileReq = new GetPlayerProfileRequest
-        {
-            PlayFabId = playfabID
-        };
-        PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
-        yield return new WaitUntil(()=> displayName != null);
+        Debug.Log(GetPlayerDisplayName());
         //If no display name, set display name to "Guest"
-        if ((displayName == null) || (displayName == ""))
+        if (GetPlayerDisplayName() == null)
         {
             updateDisplayName();
-            yield return new WaitUntil(()=> (displayName != null) && (displayName != ""));
         }
 
         msgBox.text = "Success " + r.PlayFabId;
@@ -108,7 +105,7 @@ public class PFUserMgt : MonoBehaviour
     }
 
     public void OnResetPassword()
-    { 
+    {
         var resetReq = new SendAccountRecoveryEmailRequest
         {
             Email = if_email.text,
