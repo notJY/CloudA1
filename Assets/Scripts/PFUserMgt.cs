@@ -91,6 +91,7 @@ public class PFUserMgt : MonoBehaviour
 
     void OnLoginSucc(LoginResult r)
     {
+        GetPlayerDisplayName();
         //If no display name, set display name to "Guest"
         if ((displayName == null) || (displayName == ""))
         {
