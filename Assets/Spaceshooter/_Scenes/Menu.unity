@@ -10888,6 +10888,7 @@ MonoBehaviour:
   itemName: {fileID: 1833860047}
   itemDesc: {fileID: 1048712576}
   shop: {fileID: 1926774401}
+  isUpdated: 0
   inventory: []
   usedItemName: 
 --- !u!1 &1926774399
@@ -10959,6 +10960,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e891b2d6f60dce54b953e328278a3636, type: 3}
   currentItemImage: {fileID: 832121719}
   uiManager: {fileID: 1419034520}
+  inventoryManager: {fileID: 1878745704}
   shopItems: []
 --- !u!1001 &1939553369
 PrefabInstance:
