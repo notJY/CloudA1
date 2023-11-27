@@ -67,7 +67,7 @@ public class PFUserMgt : MonoBehaviour
 
     void GetPlayerDisplayName()
     {
-
+        displayName = null;
         var profileReq = new GetPlayerProfileRequest
         {
             PlayFabId = GetPlayerID()
@@ -91,11 +91,18 @@ public class PFUserMgt : MonoBehaviour
 
     void OnLoginSucc(LoginResult r)
     {
+        StartCoroutine(LoadScene(r));
+    }
+
+    IEnumerator LoadScene(LoginResult r)
+    {
         GetPlayerDisplayName();
+        yield return new WaitUntil(()=> displayName != null);
         //If no display name, set display name to "Guest"
         if ((displayName == null) || (displayName == ""))
         {
             updateDisplayName();
+            yield return new WaitUntil(()=> (displayName != null) && (displayName != ""));
         }
 
         msgBox.text = "Success " + r.PlayFabId;
