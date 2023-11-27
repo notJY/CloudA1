@@ -38,8 +38,16 @@ public class PFLeaderboard : MonoBehaviour
         string leaderboardStr = "Global Leaderboard\n";
         foreach (var item in r.Leaderboard)
         {
-            string oneRow = (item.Position + 1) + " " + item.DisplayName + " " + item.StatValue + "\n";
-            leaderboardStr += oneRow;
+            if ((item.DisplayName == null) || (item.DisplayName == ""))
+            {
+                string oneRow = (item.Position + 1) + " Guest " + item.StatValue + "\n";
+                leaderboardStr += oneRow;
+            }
+            else
+            {
+                string oneRow = (item.Position + 1) + " " + item.DisplayName + " " + item.StatValue + "\n";
+                leaderboardStr += oneRow;
+            }
         }
         leaderboardtxt.text = leaderboardStr;
     }
@@ -59,8 +67,16 @@ public class PFLeaderboard : MonoBehaviour
         string leaderboardStr = "Nearby Leaderboard\n";
         foreach (var item in r.Leaderboard)
         {
-            string oneRow = (item.Position + 1) + " " + item.DisplayName + " " + item.StatValue + "\n";
-            leaderboardStr += oneRow;
+            if ((item.DisplayName == null) || (item.DisplayName == ""))
+            {
+                string oneRow = (item.Position + 1) + " Guest " + item.StatValue + "\n";
+                leaderboardStr += oneRow;
+            }
+            else
+            {
+                string oneRow = (item.Position + 1) + " " + item.DisplayName + " " + item.StatValue + "\n";
+                leaderboardStr += oneRow;
+            }
         }
         leaderboardtxt.text = leaderboardStr;
     }

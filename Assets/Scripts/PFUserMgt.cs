@@ -11,8 +11,6 @@ public class PFUserMgt : MonoBehaviour
     [SerializeField] TMP_Text msgBox;
     [SerializeField] TMP_InputField if_username, if_password, if_email;
 
-    private string playfabID, displayName;
-
     public void OnButtonRegUser()
     {
         var regReq = new RegisterPlayFabUserRequest
@@ -58,48 +56,8 @@ public class PFUserMgt : MonoBehaviour
         }
     }
 
-    string GetPlayerID()
-    {
-        var accReq = new GetAccountInfoRequest();
-        PlayFabClientAPI.GetAccountInfo(accReq, r => { playfabID = r.AccountInfo.PlayFabId; }, OnError);
-        return playfabID;
-    }
-
-    string GetPlayerDisplayName()
-    {
-
-        var profileReq = new GetPlayerProfileRequest
-        {
-            PlayFabId = GetPlayerID()
-        };
-        PlayFabClientAPI.GetPlayerProfile(profileReq, r => { displayName = r.PlayerProfile.DisplayName; }, OnError);
-
-        return displayName;
-    }
-
-    void updateDisplayName()
-    {
-        var updateNameReq = new UpdateUserTitleDisplayNameRequest
-        {
-            DisplayName = "Guest"
-        };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(updateNameReq, OnDisplayNameUpdate, OnError);
-    }
-
-    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult r)
-    {
-        Debug.Log("Display name updated: " + r.DisplayName);
-    }
-
     void OnLoginSucc(LoginResult r)
     {
-        Debug.Log(GetPlayerDisplayName());
-        //If no display name, set display name to "Guest"
-        if (GetPlayerDisplayName() == null)
-        {
-            updateDisplayName();
-        }
-
         msgBox.text = "Success " + r.PlayFabId;
         SceneManager.LoadScene("Menu");
     }
