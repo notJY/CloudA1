@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Init inv");
             //GameObject scale starts at (0, 0, 0) so it can be hidden and initialize variables at the same time
-            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            transform.localScale = new Vector3(1, 1, 1);
 
             gameObject.SetActive(false);
             isInit = true;

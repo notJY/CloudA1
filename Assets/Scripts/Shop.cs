@@ -27,6 +27,11 @@ public class Shop : MonoBehaviour
         }
         else
         {
+            //GameObject scale starts at (0, 0, 0) so it can be hidden and initialize variables at the same time
+            if (transform.localScale != new Vector3(1, 1, 1))
+            {
+                transform.localScale.Set(1, 1, 1);
+            }
             RefreshShop();
         }
     }
@@ -39,7 +44,7 @@ public class Shop : MonoBehaviour
         isAwake = true;
 
         //GameObject scale starts at (0, 0, 0) so it can be hidden and initialize variables at the same time
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        transform.localScale = new Vector3(1, 1, 1);
 
         gameObject.SetActive(false);
     }
