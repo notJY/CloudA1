@@ -102,28 +102,4 @@ public class PFLeaderboard : MonoBehaviour
     {
         Debug.Log("Successful leaderboard send: " + r.ToString());
     }
-
-    public void OnButtonGetFriendLeaderboard()
-    {
-        PlayFabClientAPI.GetFriendLeaderboard(
-        new GetFriendLeaderboardRequest { StatisticName = "Highscore", MaxResultsCount = 10 },
-        r =>
-        {
-            string leaderboardStr = "Friends Leaderboard\n";
-            foreach (var item in r.Leaderboard)
-            {
-                if ((item.DisplayName == null) || (item.DisplayName == ""))
-                {
-                    string oneRow = (item.Position + 1) + " Guest " + item.StatValue + "\n";
-                    leaderboardStr += oneRow;
-                }
-                else
-                {
-                    string oneRow = (item.Position + 1) + " " + item.DisplayName + " " + item.StatValue + "\n";
-                    leaderboardStr += oneRow;
-                }
-            }
-            leaderboardtxt.text = leaderboardStr;
-        }, OnError);
-    }
 }

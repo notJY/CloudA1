@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
 
     void OnHighscoreReceived(GetPlayerStatisticsResult r)
     {
-        if (!isMenu && (r.Statistics != null) && (r.Statistics.Count > 0))
+        if (!isMenu && (r.Statistics != null))
         {
             highscore = r.Statistics[0].Value;
         }

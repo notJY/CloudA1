@@ -24,8 +24,8 @@ public class GameController : MonoBehaviour {
     public UIManager uiManager;
     public TMP_Text messageTxt;
 
-    [HideInInspector]public bool gameOver;
     private bool restart;
+    private bool gameOver;
     private int score;
     private List<GameObject> asteroids;
 
