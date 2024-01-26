@@ -23,12 +23,15 @@ public class Inventory : MonoBehaviour
         if (!isAwake)
         {
             isUpdated = false;
-            //Get inventory slot gameObjects in scene
-            GameObject[] slots = GameObject.FindGameObjectsWithTag("Inventory Slot");
-            //Get the image component of each slot
-            foreach (GameObject slot in slots)
+            //Get inventory image gameObjects in children
+            Image[] invImages = gameObject.GetComponentsInChildren<Image>(); 
+            foreach (Image img in invImages)
             {
-                inventorySlots.Add(slot.GetComponent<Image>());
+                //If image belongs to an inventory slot, add to list
+                if (img.gameObject.tag == "Inventory Slot")
+                {
+                    inventorySlots.Add(img);
+                }
             }
 
             isAwake = true;

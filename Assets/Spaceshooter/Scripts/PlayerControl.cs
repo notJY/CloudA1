@@ -150,6 +150,7 @@ public class PlayerControl : MonoBehaviour {
 
     void OnError(PlayFabError e)
     {
+        Debug.Log(e.GenerateErrorReport());
         usedItemName = null;
     }
 

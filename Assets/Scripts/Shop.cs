@@ -46,6 +46,7 @@ public class Shop : MonoBehaviour
 
     void RefreshShop()
     {
+        itemBoughtTxt.text = "";
         itemName.text = shopItems[currentItem].DisplayName;
         itemDesc.text = shopItems[currentItem].Description;
         itemPrice.text = "Price: " + shopItems[currentItem].VirtualCurrencyPrices["GD"].ToString() + " Gold";
